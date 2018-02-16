@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+    <aop:config>
+        <aop:aspect ref="audience">
+
+            <!--В pointcut included all of methods {perform} in all classes implementing interface {Performance},
+            from other packages also -->
+            <!--<aop:pointcut id="performance"
+                          expression="execution(* spring.aopXml.fromSpeca.mainPackage.Performer.perform(..))"/>-->
+
+            <!--В pointcut included all of methods {perform} in all classes implementing interface {Performance},
+           but from package {mainPackage} only -->
+            <aop:pointcut id="performance"
+                          expression="execution(* spring.aopXml.fromSpeca.mainPackage.Performer.perform(..))
+                          and within(spring.aopXml.fromSpeca.mainPackage.*)"/>
+
+            <aop:before pointcut-ref="performance" method="takeSeats"/>
+            <aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
+            <aop:after pointcut-ref="performance" method="getUp"/>
+            <aop:after-returning pointcut-ref="performance" method="applaud"/>
+            <aop:after-throwing pointcut-ref="performance" method="demandRefund"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!-- Definitions for performers bean -->
+    <bean id="performer1" class="spring.aopXml.fromSpeca.mainPackage.Performer1"> </bean>
+    <bean id="performer2" class="spring.aopXml.fromSpeca.mainPackage.Performer2"> </bean>
+    <bean id="performer3" class="spring.aopXml.fromSpeca.otherPackage.Performer3"> </bean>
+
+    <!-- Here we define class with advices -->
+    <bean id="audience" class="spring.aopXml.fromSpeca.mainPackage.Audience"/>
+
+</beans>
