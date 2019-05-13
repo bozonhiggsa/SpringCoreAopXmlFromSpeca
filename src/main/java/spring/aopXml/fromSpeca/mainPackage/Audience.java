@@ -11,8 +11,8 @@ public class Audience {
         System.out.println("The audience is taking their seats");
     }
 
-    public void turnOffCellPhones(){
-        System.out.println("The audience is turning off their cellphones");
+    public void turnOffMobilePhones(){
+        System.out.println("The audience is turning off their mobile phones");
     }
 
     public void getUp(){

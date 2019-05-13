@@ -10,6 +10,6 @@ public class Performer3 implements Performer {
 
 
     public void perform() {
-        System.out.println("3 - My perfomance was very success. That's brilliant!!!");
+        System.out.println("3 - My performance was very successful. That's brilliant!!!");
     }
 }

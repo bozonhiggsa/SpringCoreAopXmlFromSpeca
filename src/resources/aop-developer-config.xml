@@ -9,20 +9,15 @@
 
     <aop:config>
         <aop:aspect ref="audience">
-
-            <!--В pointcut included all of methods {perform} in all classes implementing interface {Performance},
-            from other packages also -->
-            <!--<aop:pointcut id="performance"
-                          expression="execution(* spring.aopXml.fromSpeca.mainPackage.Performer.perform(..))"/>-->
-
-            <!--В pointcut included all of methods {perform} in all classes implementing interface {Performance},
-           but from package {mainPackage} only -->
             <aop:pointcut id="performance"
                           expression="execution(* spring.aopXml.fromSpeca.mainPackage.Performer.perform(..))
                           and within(spring.aopXml.fromSpeca.mainPackage.*)"/>
 
+            <!--<aop:pointcut id="performance"
+                          expression="execution(* spring.aopXml.fromSpeca.mainPackage.Performer.perform(..))"/>-->
+
             <aop:before pointcut-ref="performance" method="takeSeats"/>
-            <aop:before pointcut-ref="performance" method="turnOffCellPhones"/>
+            <aop:before pointcut-ref="performance" method="turnOffMobilePhones"/>
             <aop:after pointcut-ref="performance" method="getUp"/>
             <aop:after-returning pointcut-ref="performance" method="applaud"/>
             <aop:after-throwing pointcut-ref="performance" method="demandRefund"/>

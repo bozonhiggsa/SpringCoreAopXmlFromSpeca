@@ -11,8 +11,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class PerformanceRunner {
 
     public static void main(String[] args) throws Exception {
+
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("aop-developer-config.xml");
+        System.out.println("-------------------");
         System.out.println("Spring context was created");
         System.out.println("-------------------");
 
@@ -24,7 +26,12 @@ public class PerformanceRunner {
         System.out.println("-------------------");
         performer3.perform();
         System.out.println("-------------------");
-        performer2.perform();
+        try{
+            performer2.perform();
+        }
+        catch(Exception e){
+            /*NOP*/
+        }
         System.out.println("-------------------");
 
     }
